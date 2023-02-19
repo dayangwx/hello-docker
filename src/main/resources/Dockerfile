@@ -1,9 +1,10 @@
-FROM java:8
+FROM git AS gitclone
 
-COPY *.jar /app.jar
+ARG url=https://github.com/dayangwx/hello-docker.git
 
-CMD ["--server.port=8080"]
+ARG appName=hello-docker
 
-EXPOSE 8080
+RUN git clone $url
 
-ENTRYPOINT ["java","-jar","/app.jar"]
+RUN cd $appName && ls -l
+
